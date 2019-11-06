@@ -1,6 +1,6 @@
 # Patient Profile App
 
-**DISCLAIMER: This is a sample of how I code.  You can try to use this repo, but without the database it's gonna be useless to you.
+##**DISCLAIMER: This is a sample of how I code.  You can try to use this repo, but without the database it's gonna be useless to you.
 
 So...this code is a sample application of the type of coding I do for YGEIA GROUP and our @HomeVitals software.
 
@@ -18,7 +18,7 @@ This data was trimmed down and anonymized for purposes of this project, but the 
 
 
 
-**of note: ReactJs front end has not been started on yet.  This is version 0.123.
+##**of note: ReactJs front end has not been started on yet.  This is version 0.123.
 
 
 
