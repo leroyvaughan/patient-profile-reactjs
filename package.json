@@ -1,0 +1,28 @@
+{
+  "name": "patient-profile-app",
+  "version": "0.123",
+  "description": "Sample NodeJs and ReactJs code",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --use_strict index.js",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+  },
+  "engines": {
+    "node": "~4.2.4 || 10.x"
+  },
+  "keywords": [],
+  "author": "Gary LeRoy Vaughan Jr",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^6.0.0",
+    "express": "^4.17.1",
+    "guid": "0.0.12",
+    "helmet": "^3.5.0",
+    "mongoose": "^5.7.7",
+    "nodemon": "^1.19.4",
+    "path": "^0.12.7"
+  }
+}
