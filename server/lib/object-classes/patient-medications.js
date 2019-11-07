@@ -18,9 +18,8 @@ module.exports = function (db) {
             Medications.find(
                 { "patientId": { $eq: pID } },
                 {
-                    "_id": 0, "medications.status": 1, "medications.description": 1,
-                    "medications.dosageInstruction": 1, "medications.dateRecorded": 1,
-                    "total": 1
+                    "_id": 0, "medications.description": 1,
+                    "medications.dosageInstruction": 1, "total": 1
                 },
 
                 (err, meds) => {

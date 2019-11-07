@@ -197,17 +197,22 @@ module.exports = function (patientId) {
             medications.get(pID)
                 .then((data) => {
                     let meds = data.medications;
-                    let tempData = [];
+                    let tempData = [], descs = [];
 
                     for (let x = 0; x < (meds.length - 1); x++) {
                         //get data from main object
                         let curObj = meds[x];
 
-                        delete curObj.dateRecorded;
-                        delete curObj.status;
-
-                        //set modified object to temp holder obj
-                        tempData[x] = curObj;
+                        if (x === 0) {
+                            descs.push(curObj.description);
+                            tempData.push(curObj);
+                        }
+                        else {
+                            if (!descs.includes(curObj.description)) {
+                                descs.push(curObj.description);
+                                tempData.push(curObj);
+                            }
+                        }
                     }
 
                     //attempt sort of JsonArray items by Description
@@ -274,6 +279,7 @@ module.exports = function (patientId) {
 
 
 
+
     let getSensorReadings = () => {
         console.log("\r\ngetting patient sensor readings");
 
@@ -281,11 +287,21 @@ module.exports = function (patientId) {
         return Promise.series([getBloodPressureData, getBloodGlucoseData, getWeightScaleData]);
     };
 
+
     let getBloodPressureData = () => {
         return new Promise((resolve, reject) => {
 
             sensorReadings.get("bp")
                 .then((data) => {
+
+                    //attempt sort of JsonArray items by Time Stamp
+                    try {
+                        data.sort(sortJsonByKey("time_stamp"));
+                    }
+                    catch (e) {
+                        console.log("err in getBloodPressureData().dataSort:\t" + e);
+                    }
+
 
                     pObj.sensorData.bloodPressure = data;
                     resolve();
@@ -304,6 +320,14 @@ module.exports = function (patientId) {
             sensorReadings.get("glucose")
                 .then((data) => {
 
+                    //attempt sort of JsonArray items by Time Stamp
+                    try {
+                        data.sort(sortJsonByKey("time_stamp"));
+                    }
+                    catch (e) {
+                        console.log("err in getBloodGlucoseData().dataSort:\t" + e);
+                    }
+
                     pObj.sensorData.bloodGlucose = data;
                     resolve();
                 })
@@ -320,6 +344,14 @@ module.exports = function (patientId) {
 
             sensorReadings.get("weight")
                 .then((data) => {
+
+                    //attempt sort of JsonArray items by Time Stamp
+                    try {
+                        data.sort(sortJsonByKey("time_stamp"));
+                    }
+                    catch (e) {
+                        console.log("err in getWeightScaleData().dataSort:\t" + e);
+                    }
 
                     pObj.sensorData.weight = data;
                     resolve();

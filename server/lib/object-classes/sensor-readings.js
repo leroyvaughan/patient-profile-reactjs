@@ -31,7 +31,9 @@ module.exports = function (pID) {
                             "time_stamp": 1,
                             "Systolic": "$SensorData.Systolic",
                             "Diastolic": "$SensorData.Diastolic",
-                            "HeartRate": "$SensorData.HeartRate"
+                            "HeartRate": "$SensorData.HeartRate",
+                            "date": 1,
+                            "time": 1
                         }
                     };
 
@@ -42,7 +44,9 @@ module.exports = function (pID) {
                         $project: {
                             "_id": 0,
                             "time_stamp": 1,
-                            "BG": "$SensorData.BG"
+                            "BG": "$SensorData.BG",
+                            "date": 1,
+                            "time": 1
                         }
                     };
                     break;
@@ -54,6 +58,8 @@ module.exports = function (pID) {
                             "time_stamp": 1,
                             "BMI": "$SensorData.BMI",
                             "Weight": "$SensorData.WeightValue",
+                            "date": 1,
+                            "time": 1
                         }
                     };
                     break;
