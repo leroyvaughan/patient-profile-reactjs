@@ -33,7 +33,7 @@ module.exports = function () {
                         return reject("no data");
                     }
 
-                    let jsonData = JSON.stringify(procedures);
+                    let jsonData = JSON.stringify(procedures[0]);
                     return resolve(JSON.parse(jsonData));
                 });
         });

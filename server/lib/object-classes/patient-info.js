@@ -8,13 +8,23 @@ const Patient = require('../../models/patient-model');
 module.exports = function () {
     const self = this;
 
+
+    //public methods
     self.get = function (pID) {
         return _get(pID);
     };
 
+    self.getAll = function () {
+        return _getAll();
+    }
+
+
+
+
+    //private methods
     let _get = function (pID) {
         return new Promise((resolve, reject) => {
-            console.log("patient-info get()...");
+            console.log("patient-info get(" + pID + ")...");
 
             Patient.find(
                 { "patientId": { $eq: pID } },
@@ -48,4 +58,31 @@ module.exports = function () {
     };
 
 
-};
+    let _getAll = function () {
+        return new Promise((resolve, reject) => {
+            console.log("patient-info getAll()...");
+
+            Patient.aggregate(
+                [
+                    { $unwind: "$name" }
+                    , { $project: { "_id": 0, "name": "$name.text", "patientId": 1 } }
+                ],
+
+                (err, allPatients) => {
+                    if (err) {
+                        return reject("Err in patient-info:\t" + err);
+                    }
+
+                    if (isNull(allPatients)) {
+                        return reject(null);
+                    }
+
+                    //send parsed data
+                    return resolve(allPatients);
+                }
+            ); 4
+
+        });
+    };
+
+}//end module/class

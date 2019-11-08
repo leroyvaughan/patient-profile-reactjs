@@ -1,13 +1,9 @@
 const Patient = require('../models/patient-model');
+const PatientInterface = require('../lib/patient-profiles/patient-profile-interface');
+let newPatient = new PatientInterface();
 
 
 getPatientById = (req, res) => {
-
-    // res.status(200).send();
-
-    const PatientInterface = require('../lib/patient-profiles/patient-profile-interface');
-    let newPatient = new PatientInterface();
-
     newPatient.getPatient(req.params.id)
         .then((json) => {
             return res
@@ -23,25 +19,19 @@ getPatientById = (req, res) => {
 };
 
 getPatients = async (req, res) => {
-    await Patient.find(
-        {},
-        { project: { "_id": 0, "name": 1, "patientId": 1 } },
-        (err, patients) => {
-            if (err) {
-                return res.status(400).json({ success: false, error: err })
-            }
-            if (!patients.length) {
-                return res
-                    .status(404)
-                    .json({ success: false, error: `Patient not found` })
-            }
-
+    newPatient.getPatients()
+        .then((resp) => {
             return res.status(200).json({
                 success: true,
-                data: patients
-            })
-        }).catch(err => console.log(err))
-}
+                data: resp //array of json objects
+            });
+        })
+        .catch((err) => {
+            //should only fail on code changes and (db is empty)
+            return res.status(404).json(
+                { success: false, error: `Patients not found` });
+        });
+};
 
 module.exports = {
     getPatients,

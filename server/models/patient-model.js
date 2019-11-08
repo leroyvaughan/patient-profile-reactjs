@@ -14,4 +14,5 @@ const Patient = new Schema(
 );
 
 //setting database schema model. Params: (collectionName, schemaName)
-module.exports = mongoose.model('patient_info', Patient);
+//must add third param as singular for mocha testing which will pluralize it...
+module.exports = mongoose.model('patient_info', Patient, 'patient_info');

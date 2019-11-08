@@ -58,6 +58,9 @@ module.exports = function (patientId) {
         return new Promise((resolve, reject) => {
             console.log("\r\ngetting patient allergies");
 
+            //set empty object, JIC
+            pObj.allergies = [];
+
             allergies.get(pID)
                 .then((resp) => {
 
@@ -107,6 +110,9 @@ module.exports = function (patientId) {
         return new Promise((resolve, reject) => {
             console.log("\r\ngetting patient conditions");
 
+            //set empty object, JIC
+            pObj.conditions = [];
+
             conditions.get(pID)
                 .then((resp) => {
                     let data = resp.conditions;
@@ -147,6 +153,9 @@ module.exports = function (patientId) {
     let getImmunizations = () => {
         return new Promise((resolve, reject) => {
             console.log("\r\ngetting patient immunizations");
+
+            //set empty object, JIC
+            pObj.immunizations = [];
 
             immunizations.get(pID)
                 .then((resp) => {
@@ -194,6 +203,9 @@ module.exports = function (patientId) {
         return new Promise((resolve, reject) => {
             console.log("\r\ngetting patient medications");
 
+            //set empty object, JIC
+            pObj.medications = [];
+
             medications.get(pID)
                 .then((data) => {
                     let meds = data.medications;
@@ -240,6 +252,8 @@ module.exports = function (patientId) {
         return new Promise((resolve, reject) => {
             console.log("getting patient info: " + pID);
 
+            //set empty object, JIC
+            pObj.info = {};
 
             patientInfo.get(pID)
                 .then((data) => {
@@ -266,8 +280,15 @@ module.exports = function (patientId) {
 
             procedures.get(pID)
                 .then((data) => {
-                    //not much data here for the two patients...
-                    pObj.procedures = data.procedures;
+                    //not much data HERE for the two patients...
+                    //so checking for data.total
+                    //I should check on ALL other data, but I know I have data THERE
+                    if (data.total > 0) {
+                        pObj.procedures = data.procedures;
+                    }
+                    else {
+                        pObj.procedures = [];
+                    }
 
                     resolve();
                 })
@@ -290,6 +311,8 @@ module.exports = function (patientId) {
 
     let getBloodPressureData = () => {
         return new Promise((resolve, reject) => {
+
+            pObj.sensorData.bloodPressure = [];
 
             sensorReadings.get("bp")
                 .then((data) => {
@@ -317,6 +340,8 @@ module.exports = function (patientId) {
     let getBloodGlucoseData = () => {
         return new Promise((resolve, reject) => {
 
+            pObj.sensorData.bloodGlucose = [];
+
             sensorReadings.get("glucose")
                 .then((data) => {
 
@@ -341,6 +366,8 @@ module.exports = function (patientId) {
 
     let getWeightScaleData = () => {
         return new Promise((resolve, reject) => {
+
+            pObj.sensorData.weight = [];
 
             sensorReadings.get("weight")
                 .then((data) => {

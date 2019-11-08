@@ -4,7 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 const apiPort = process.env.PORT || 5000;
-const globalVars = require('./server/lib/global-vars');
+require('./server/lib/global-vars');
 require('dotenv').config();
 
 const db = require('./server/db');
@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 
 
 
- app.get('/', (req, res) => {
-     res.redirect("/api/patient/4342012");
- })
+app.get('/', (req, res) => {
+    res.redirect("/api/patient/4342012");
+})
 
 
 app.use("/api", patientRouter);
@@ -53,6 +53,11 @@ app.use(helmet());
 
 
 // start server on the specified port, binding host
-app.listen(apiPort, function () {
-    console.log("server starting on " + apiPort);
-});
+if (!module.parent) {//do not run in test suites
+    app.listen(apiPort, function () {
+        console.log("server starting on " + apiPort);
+    });
+}
+
+
+module.exports = app;

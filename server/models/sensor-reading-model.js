@@ -18,7 +18,9 @@ var dynamicSchema = function (collectionName) {
     let elModelo;
 
     try {
-        elModelo = mongoose.model(collectionName, sensorReading);
+
+        //must add third param as singular for mocha testing which will pluralize it...
+        elModelo = mongoose.model(collectionName, sensorReading, collectionName);
     }
     catch (e) {
         elModelo = mongoose.model(collectionName);

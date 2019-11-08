@@ -10,6 +10,23 @@
   "engines": {
     "node": "~4.2.4 || 10.x"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/test/"
+    ]
+  },
+  "mocha": {
+    "diff": true,
+    "extension": [
+      "js"
+    ],
+    "opts": "./test/mocha.opts",
+    "package": "./package.json",
+    "reporter": "spec",
+    "slow": 75,
+    "timeout": 2000,
+    "ui": "bdd"
+  },
   "keywords": [],
   "author": "Gary LeRoy Vaughan Jr",
   "license": "MIT",
@@ -24,5 +41,13 @@
     "mongoose": "^5.7.7",
     "nodemon": "^1.19.4",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-counter": "^1.0.0",
+    "chai-http": "^4.3.0",
+    "expect.js": "^0.3.1",
+    "jest": "^24.9.0",
+    "mocha": "^6.2.2"
   }
 }
