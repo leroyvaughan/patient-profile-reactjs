@@ -1,11 +1,14 @@
 {
   "name": "patient-profile-app",
-  "version": "0.123",
+  "version": "0.123.0",
   "description": "Sample NodeJs and ReactJs code",
   "main": "index.js",
   "scripts": {
     "start": "node --use_strict index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "test": "mocha",
+    "test-with-coverage": "nyc --reporter=text mocha",
+    "coverage": "nyc npm run test"
   },
   "engines": {
     "node": "~4.2.4 || 10.x"
@@ -26,6 +29,17 @@
     "slow": 75,
     "timeout": 2000,
     "ui": "bdd"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "server/**/*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js",
+      "node_modules/*",
+      "client/*"
+    ]
   },
   "keywords": [],
   "author": "Gary LeRoy Vaughan Jr",
@@ -48,6 +62,7 @@
     "chai-http": "^4.3.0",
     "expect.js": "^0.3.1",
     "jest": "^24.9.0",
-    "mocha": "^6.2.2"
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1"
   }
 }
