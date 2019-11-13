@@ -1,0 +1,134 @@
+html, body, #background, #root{
+    height: 100%;
+}
+
+
+
+.ReactTable .rt-thead{  
+    background-color: #e3ad0d;
+}
+
+.ReactTable .rt-tr {
+  border-bottom: 1px solid #4CAF50 !important;
+}
+
+.ReactTable .rt-tr-group{
+  background-color: #aaebd680;
+}
+
+.ReactTable .rt-td:not(.name){  
+  text-align: center;
+}
+
+.pagination-bottom{ display: none; }
+
+.viewLink{
+  color: green;
+}
+
+
+
+
+
+
+
+/*  ###########  Patient View By Id ############  */
+
+#patient-select{
+  min-width: 200px;
+}
+
+#data-objects-wrapper .row > .col-sm-6{
+  margin-bottom: 21px;
+}
+
+.dataObjectHdr{
+  background-color: #607D8B;
+  color: #ffffff;
+  border-radius: 7px 7px 0 0;
+  text-align: center;
+  padding: 4px 0;
+  font-size: 1.2rem;
+}
+
+.colHdr{
+  background-color: #d6d3d3;
+  border-bottom: 1px solid #607D8B;
+  color: #607D8B;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 2px 0;
+}
+.colHdr:last-child{
+  border-left: 1px solid #607D8B;
+  text-align: right;
+}
+
+
+/* allergies */
+.colData{
+  font-style: italic;
+  font-size: .9rem;
+  padding: 3px 0 4px;
+}
+.colData:last-child{
+  text-align: right;
+}
+
+.data-row:not(:last-child){
+  border-bottom: 1px solid #ccc;
+}
+
+
+
+
+#backBtn{
+  margin: 15px 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+/* larger screens */
+@media only screen and (min-width: 576px){
+  #navHdr{
+    font-size: 1.7em;
+    line-height: 74px;
+  }
+
+  #patient-select{
+    float: right;
+  }
+}
+
+
+
+
+
+
+/* smaller screens */
+@media only screen and (max-width: 575px) {
+
+  #navHdr{
+    background-color: #dadada;
+    border-top: 1px solid #333;
+    font-size: 1em;
+    padding: 4px 0;
+  }
+
+  #patient-select{
+    margin-bottom: 21px;
+  }
+
+  #data-objects-wrapper{
+    padding: 0px;
+  }
+
+}
+

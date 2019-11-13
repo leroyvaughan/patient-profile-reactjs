@@ -76,6 +76,7 @@ module.exports = function (patientId) {
 
                         //make root allergy description 'field'
                         curObj.description = curObj.substance.text;
+                        delete curObj.substance;
 
                         //keep the first item and non-duplicates
                         if (x === 0 || !descs.includes(curObj.description)) {

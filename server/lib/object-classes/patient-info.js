@@ -65,7 +65,12 @@ module.exports = function () {
             Patient.aggregate(
                 [
                     { $unwind: "$name" }
-                    , { $project: { "_id": 0, "name": "$name.text", "patientId": 1 } }
+                    , {
+                        $project: {
+                            "_id": 0, "name": "$name.text",
+                            "patientId": 1, "age": 1, "gender": 1
+                        }
+                    }
                 ],
 
                 (err, allPatients) => {

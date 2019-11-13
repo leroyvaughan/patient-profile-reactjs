@@ -1,7 +1,14 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import logo from '../logo.svg'
+
+const LogoImg = styled.img.attrs({
+    src: "/img/logo_final.gif",
+    alt: "",
+    title: "GoTo Patient Profile Home Page",
+})`
+`
+
 
 const Wrapper = styled.a.attrs({
     className: 'navbar-brand',
@@ -10,11 +17,13 @@ const Wrapper = styled.a.attrs({
 class Logo extends Component {
     render() {
         return (
-            <Wrapper href="https://sambarros.com">
-                <img src={logo} width="50" height="50" alt="sambarros.com" />
-            </Wrapper>
+            <div className="col-sm-4">
+                <Wrapper href="/">
+                    <LogoImg />
+                </Wrapper>
+            </div>
         )
     }
 }
 
-export default Logo
+export default Logo;

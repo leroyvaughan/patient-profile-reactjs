@@ -3,9 +3,8 @@ import { Redirect } from 'react-router';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { NavBar } from '../components'
-import { MoviesList } from '../pages'
-import { MoviesInsert } from '../pages'
-import { MoviesUpdate } from '../pages'
+import { PatientsList } from '../pages'
+import { PatientById } from '../pages'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -14,14 +13,13 @@ function App() {
         <Router>
             <NavBar />
             <Switch>
-                <Route path="/movies/list" exact component={MoviesList} />
-                <Route path="/movies/create" exact component={MoviesInsert} />
+                <Route path="/patients/list" exact component={PatientsList} />
                 <Route
-                    path="/movies/update/:id"
+                    path="/patient/:id"
                     exact
-                    component={MoviesUpdate}
+                    component={PatientById}
                 />
-                <Redirect exact from="/" to="/movies/list" />
+                <Redirect exact from="/" to="/patients/list" />
             </Switch>
         </Router>
     )

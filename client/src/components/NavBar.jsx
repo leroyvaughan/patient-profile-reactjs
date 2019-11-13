@@ -1,15 +1,17 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import Logo from './Logo'
-import Links from './Links'
+import Logo from './Logo';
+import NavHdr from './NavHdr';
 
 const Container = styled.div.attrs({
-    className: 'container',
-})``
+    className: 'container-fluid',
+})`
+    border-bottom: 1px solid #000;
+`
 
 const Nav = styled.nav.attrs({
-    className: 'navbar navbar-expand-lg navbar-dark bg-dark',
+    className: 'row',
 })`
     margin-bottom: 20 px;
 `
@@ -20,11 +22,11 @@ class NavBar extends Component {
             <Container>
                 <Nav>
                     <Logo />
-                    <Links />
+                    <NavHdr />
                 </Nav>
             </Container>
         )
     }
 }
 
-export default NavBar
+export default NavBar;
