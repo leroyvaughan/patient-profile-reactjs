@@ -23,7 +23,10 @@ const Container = styled.div.attrs({
 
 const Row = styled.div.attrs({
     className: "row data-row"
-})``
+})`
+    padding: 15px;
+    margin-bottom: 21px;
+`
 
 const Hdr = styled.div.attrs({
     className: "dataObjectHdr"
@@ -86,7 +89,7 @@ class BloodGlucose extends Component {
     }
 
     componentWillReceiveProps({ data }) {
-        this.setState({ data });
+        this.setState({ chartData: data });
     }
 
 
