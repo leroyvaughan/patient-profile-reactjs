@@ -8,10 +8,9 @@ const Column = styled.div.attrs({
 })`
 `
 
-const Body = styled.div`
-    border: 1px solid #777;
-    border-radius: 0 0 7px 7px;
-`
+const Body = styled.div.attrs({
+    className: "dataBody"
+})``
 
 const Col = styled.div.attrs({
     className: "col colData"
@@ -49,12 +48,6 @@ class Medications extends Component {
         this.state = {
             data: this.props.data
         }
-    }
-
-    componentDidMount = () => {
-        const { data } = this.state;
-
-        console.log(data);
     }
 
     componentWillReceiveProps({ data }) {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { Allergies, Medications } from '../components';
+import { Allergies, Conditions, Immunizations, Medications, Procedures } from '../components';
 
 
 
@@ -80,7 +80,7 @@ class PatientById extends Component {
     getData = async (pID) => {
 
         if (!pID) {
-            var pID = this.state.patientId;
+            pID = this.state.patientId;
         }
 
         console.log("getData:\t" + pID)
@@ -130,7 +130,7 @@ class PatientById extends Component {
 
     render() {
         const {
-            patientId, name, allergies, conditions, immunizations, info, medications,
+            patientId, name, allergies, conditions, immunizations, medications,
             procedures, sensorData, age, gender, dob, ethnicity, careProvider,
             options
         } = this.state;
@@ -138,11 +138,10 @@ class PatientById extends Component {
         return (
             <Wrapper>
                 {this.state.isMounted && (
-                    <div>
+                    <div className="mt-4">
                         <SelectWrapper>
                             <Select
                                 id="patient-select"
-                                className="mt-4"
                                 onChange={this.handleChange}
                                 options={options}
                                 defaultValue={{ label: name, value: patientId }}
@@ -164,6 +163,21 @@ class PatientById extends Component {
                             <Row>
                                 <Allergies data={allergies} />
                                 <Medications data={medications} />
+                            </Row>
+
+                            <Row>
+                                <Immunizations data={immunizations} />
+                                <Conditions data={conditions} />
+                            </Row>
+
+                            { /*not enough data for the two sample patients */}
+                            {/* <Row>
+                                 <Procedures data={procedures} />
+                             </Row> */}
+
+
+                            <Row>
+
                             </Row>
 
                         </Container>

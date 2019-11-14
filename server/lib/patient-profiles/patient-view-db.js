@@ -126,6 +126,10 @@ module.exports = function (patientId) {
                         //keep the first item & non-duplicates
                         if (x === 0 || !descs.includes(curObj.description)) {
                             descs.push(curObj.description);
+
+                            //make friendly date for display
+                            curObj.dateRecorded = getDateTimeStampObj(curObj.dateRecorded)[0];
+
                             tempData.push(curObj);
                         }
                     }
@@ -172,6 +176,10 @@ module.exports = function (patientId) {
                             //keep the first item & non-duplicates
                             if (tempData.length === 0 || !descs.includes(curObj.description)) {
                                 descs.push(curObj.description);
+
+                                //make friendly date for display
+                                curObj.dateRecorded = getDateTimeStampObj(curObj.dateRecorded)[0];
+
                                 tempData.push(curObj);
                             }
                         }

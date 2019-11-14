@@ -3,12 +3,16 @@ import NavBar from './NavBar';
 import NavHdr from './NavHdr';
 
 //Patient Data Object Components
-import Allergies from './patient_data/allergies';
-import Medications from './patient_data/medications';
+import Allergies from './patient_data/Allergies';
+import Medications from './patient_data/Medications';
+import Immunizations from './patient_data/Immunizations';
+import Procedures from './patient_data/Procedures';
+import Conditions from './patient_data/Conditions';
 
 
 
 export {
     Logo, NavBar, NavHdr,
-    Allergies, Medications
+    Allergies, Medications, Conditions,
+    Procedures, Immunizations
 };

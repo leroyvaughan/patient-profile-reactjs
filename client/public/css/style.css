@@ -42,6 +42,11 @@ html, body, #background, #root{
   margin-bottom: 21px;
 }
 
+.dataBody{
+  border: 1px solid #777;
+  border-radius: 0 0 7px 7px;
+}
+
 .dataObjectHdr{
   background-color: #607D8B;
   color: #ffffff;
@@ -69,7 +74,7 @@ html, body, #background, #root{
 .colData{
   font-style: italic;
   font-size: .9rem;
-  padding: 3px 0 4px;
+  padding: 7px 0 7px;
 }
 .colData:last-child{
   text-align: right;
@@ -78,6 +83,41 @@ html, body, #background, #root{
 .data-row:not(:last-child){
   border-bottom: 1px solid #ccc;
 }
+
+
+
+/* immunizations, condtions */
+#immunizations .colData:first-child{
+  color: #343490;
+}
+
+#conditions .colData:last-child, 
+#immunizations .colData:last-child{
+  color: #5d5c5b;
+  font-size: 0.8em;
+}
+
+#conditions .colData:first-child{
+  color: #360d80;
+}
+
+
+#conditions-scrollarea{
+  width: 100% !important;
+  height: 447.4px !important;
+}
+
+#conditions-scrollarea .data-row{
+  margin: 0px !important;
+}
+
+
+
+
+
+
+
+
 
 
 
