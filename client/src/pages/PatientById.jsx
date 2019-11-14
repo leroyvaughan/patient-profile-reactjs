@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import { Allergies, Conditions, Immunizations, Medications, Procedures } from '../components';
+import { Allergies, Conditions, Immunizations, Medications } from '../components';
+import { BloodGlucose } from '../components';
+import BloodPressure from '../components/patient_data/BloodPressure';
+// import { Procedures } from '../components';
 
 
 
@@ -42,6 +45,18 @@ const Row = styled.div.attrs({
     className: "row"
 })``
 
+const BPWrapper = styled.div`
+    margin-top: 50px;
+    text-align: right;
+`
+
+const Button = styled.div.attrs({
+    className: "btn btn-secondary"
+})`
+    font-size: 0.8em !important;
+    padding: 3px 10px !important;
+`
+
 
 class PatientById extends Component {
     constructor(props) {
@@ -63,15 +78,12 @@ class PatientById extends Component {
             gender: '',
             careProvider: '',
             isMounted: false,
+            chartType: "Line",
             options: [
                 { label: 'Smart, Timmy', value: '4342012' },
                 { label: 'Paddack, Dustin Lee', value: '861933' },
             ]
         }
-
-
-
-        console.log("patientById()");
     }
 
 
@@ -83,7 +95,7 @@ class PatientById extends Component {
             pID = this.state.patientId;
         }
 
-        console.log("getData:\t" + pID)
+        // console.log("getData:\t" + pID)
 
         let response = await fetch("/api/patient/" + pID);
         let patient = await response.json();
@@ -105,15 +117,11 @@ class PatientById extends Component {
             careProvider: pObj.info.careProvider[0].display,
             isMounted: true,
         });
-
-        console.log(this.state.name);
     }
 
 
 
     handleChange = (selectedOption) => {
-        console.log("id?: " + selectedOption.value);
-
         this.setState({
             patientId: selectedOption.value
         });
@@ -121,6 +129,12 @@ class PatientById extends Component {
         this.getData(selectedOption.value);
     }
 
+    changeBPChartType = () => {
+        this.setState({
+            chartType: (this.state.chartType === "Bar") ? "Line" : "Bar",
+            sensorData: this.state.sensorData
+        })
+    }
 
 
     componentDidMount = () => {
@@ -131,9 +145,11 @@ class PatientById extends Component {
     render() {
         const {
             patientId, name, allergies, conditions, immunizations, medications,
-            procedures, sensorData, age, gender, dob, ethnicity, careProvider,
-            options
+            sensorData, age, gender, dob, ethnicity, careProvider, options, chartType
+            // , procedures
         } = this.state;
+
+        let chartTxt = (chartType === "Bar") ? "Line" : "Bar";
 
         return (
             <Wrapper>
@@ -177,8 +193,23 @@ class PatientById extends Component {
 
 
                             <Row>
-
+                                <BloodGlucose data={sensorData.bloodGlucose} />
                             </Row>
+
+                            <BPWrapper>
+                                <Button
+                                    onClick={this.changeBPChartType}
+                                    className="btn btn-primary">
+                                    View as {chartTxt} Chart
+                                </Button>
+
+                                <Row>
+                                    <BloodPressure
+                                        data={sensorData.bloodPressure}
+                                        type={chartType}
+                                    />
+                                </Row>
+                            </BPWrapper>
 
                         </Container>
 

@@ -113,6 +113,11 @@ html, body, #background, #root{
 
 
 
+/*  Charts */
+#bpChart{
+  border-width: 0 0 2px;
+}
+
 
 
 
