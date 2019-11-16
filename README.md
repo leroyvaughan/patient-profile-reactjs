@@ -18,13 +18,8 @@ This data was trimmed down and anonymized for purposes of this project, but the 
 
 
 
-## **of note: ReactJs front end has not been started on yet.  This is version 0.123.
-
-
-
-
 Here's the running app online:
-https://{ NOT UP YET }.herokuapp.com/
+[Patient Profile ReactJs](https://patient-profile.herokuapp.com/)
 
 
 Thanks for checking me out!!!
