@@ -389,7 +389,14 @@ module.exports = function (patientId) {
                         console.log("err in getWeightScaleData().dataSort:\t" + e);
                     }
 
-                    pObj.sensorData.weight = data;
+                    let dataOut = [];
+                    data.forEach(curObj => {
+                        let newWeight = convertToPounds(curObj.Weight);
+                        curObj.Weight = Math.floor(newWeight);
+                        dataOut.push(curObj);
+                    });
+
+                    pObj.sensorData.weight = dataOut;
                     resolve();
                 })
                 .catch((err) => {

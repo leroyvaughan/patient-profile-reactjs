@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import { Allergies, Conditions, Immunizations, Medications } from '../components';
-import { BloodGlucose } from '../components';
-import BloodPressure from '../components/patient_data/BloodPressure';
 // import { Procedures } from '../components';
+
+import { BloodPressure } from '../components';
+import { BloodGlucose } from '../components';
+import { Weight } from '../components';
+
 
 
 
@@ -90,7 +93,6 @@ class PatientById extends Component {
 
 
     getData = async (pID) => {
-
         if (!pID) {
             pID = this.state.patientId;
         }
@@ -100,6 +102,7 @@ class PatientById extends Component {
         let response = await fetch("/api/patient/" + pID);
         let patient = await response.json();
         let pObj = patient.data;
+        window.history.pushState("Patient Id Change", "Patient Profile", "/patient/" + pID);
 
         this.setState({
             name: pObj.name,
@@ -211,19 +214,18 @@ class PatientById extends Component {
                                 </Row>
                             </BPWrapper>
 
+
+                            <Row>
+                                <Weight
+                                    data={sensorData.weight}
+                                    type="LineChart"
+                                />
+                            </Row>
                         </Container>
 
-
-
-
-
-
-
-
-
-
-
-
+                        <br />
+                        <br />
+                        <br />
 
 
                         <Link

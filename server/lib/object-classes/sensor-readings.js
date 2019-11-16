@@ -58,6 +58,7 @@ module.exports = function (pID) {
                             "time_stamp": 1,
                             "BMI": "$SensorData.BMI",
                             "Weight": "$SensorData.WeightValue",
+                            "BodyWater": "$SensorData.WaterValue",
                             "date": 1,
                             "time": 1
                         }

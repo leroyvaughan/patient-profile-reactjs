@@ -4,26 +4,27 @@ html, body, #background, #root{
 
 
 
-.ReactTable .rt-thead{  
+.responsiveTable th{  
     background-color: #e3ad0d;
+    padding: 7px;
 }
 
-.ReactTable .rt-tr {
+.responsiveTable tr {
+  background-color: #aaebd680;
   border-bottom: 1px solid #4CAF50 !important;
 }
 
-.ReactTable .rt-tr-group{
-  background-color: #aaebd680;
+.responsiveTable td{
+  padding: 7px;
 }
 
-.ReactTable .rt-td:not(.name){  
+.responsiveTable .age{
   text-align: center;
 }
 
-.pagination-bottom{ display: none; }
-
 .viewLink{
   color: green;
+  text-decoration: underline;
 }
 
 

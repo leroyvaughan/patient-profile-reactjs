@@ -6,11 +6,7 @@ const Body = styled.div.attrs({
     className: "dataBody"
 })``
 
-const Column = styled.div.attrs({
-    className: "col-sm-6",
-    id: "blood-pressure"
-})`
-`
+
 const Col = styled.div.attrs({
     className: "col colData"
 })``
@@ -47,74 +43,50 @@ class BloodPressure extends Component {
         this.state = {
             chartData: this.props.data,
             chartType: this.props.type,
-            options1: {
+            options: {
                 title: "Most Recent Blood Pressure Readings",
-                colors: ["#5f81a7", "#dc3912"],
+                colors: ["#5f81a7", "#dc3912", "#33ac71"],
                 hAxis: {
-                    title: "Blood Pressure",
-                    minValue: 0,
-                },
-                vAxis: {
                     title: "Time of Day",
                     textStyle: {
                         fontSize: 10,
-                        color: "#777"
-                    }
-                },
-                // animation: {
-                //     startup: true,
-                //     easing: 'linear',
-                //     duration: 1500,
-                // },
-            },
-            options2: {
-                title: "Heart Rate During Blood Pressure Readings",
-                colors: ["#76A7FA"],
-                hAxis: {
-                    title: "Heart Rate",
-                    minValue: 0,
-                    textStyle: {
-                        color: "#ccc"
+                        color: "#777",
+                        slantedText: true
                     }
                 },
                 vAxis: {
-                    title: "Time of Day",
-                    textStyle: {
-                        fontSize: 10,
-                        color: "#777"
-                    }
+                    // title: "Blood Pressure",
+                    minValue: 0
                 },
-                // legend: {
-                //     position: "left"
+                pointSize: 5,
+                pointsVisible: true,
+                // axes: {
+                //     x: {
+                //         0: { side: 'top' }
+                //     }
                 // }
-            },
+
+            }
         }
     }
 
 
     massageData = (dataIn) => {
         let dataOut = [];
-        let BP = [], HR = [];
 
         //set col headers
-        BP.push(["Time of Day", "Systolic", "Diastolic"]);
-        HR.push(["Time of Day", "Heart Rate"]);
+        dataOut.push(["Time of Day", "Systolic", "Diastolic", "Heart Rate"]);
 
         //set column data
-        dataIn.map((curObj, ix) => {
+        dataIn.forEach((curObj) => {
             let dateStr = curObj.date + " " + curObj.time;
             let Systolic = curObj.Systolic;
             let Diastolic = curObj.Diastolic;
             let HeartRate = curObj.HeartRate;
 
-            BP.push([dateStr, Systolic, Diastolic]);
-            HR.push([dateStr, HeartRate]);
+            dataOut.push([dateStr, Systolic, Diastolic, HeartRate]);
         });
 
-        dataOut.push(BP, HR);
-
-        // console.log("dataOut\r");
-        // console.log(dataOut);
         return dataOut;
     }
 
@@ -124,7 +96,7 @@ class BloodPressure extends Component {
 
 
     render() {
-        const { chartData, chartType, options1, options2 } = this.state;
+        const { chartData, chartType, options } = this.state;
         let data = this.massageData(chartData);
 
         return (
@@ -139,21 +111,8 @@ class BloodPressure extends Component {
                                     chartType={chartType}
                                     width="100%"
                                     height="400px"
-                                    options={options1}
-                                    data={data[0]} />
-                            </ChartWrap>
-                        </Row>
-
-                        <p>&nbsp;</p>
-
-                        <Row id="bgChart">
-                            <ChartWrap>
-                                <Chart
-                                    chartType={chartType}
-                                    width="100%"
-                                    height="400px"
-                                    options={options2}
-                                    data={data[1]} />
+                                    options={options}
+                                    data={data} />
                             </ChartWrap>
                         </Row>
 

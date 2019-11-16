@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from "react";
+import styled from "styled-components";
 import { Chart } from "react-google-charts";
 
 const Body = styled.div.attrs({
@@ -38,34 +38,38 @@ const ChartWrap = styled.div`
 
 
 
-
-class BloodGlucose extends Component {
+class Weight extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
             chartData: this.props.data,
+            chartType: this.props.type,
             options: {
-                title: "Most Recent Blood Glucose Readings",
-                colors: ["#76A7FA"],
+                title: "Most Recent Weight Scale Readings",
+                colors: ["#f76f08", "#673AB7", "#607D8B"],
                 hAxis: {
-                    title: "Glucose Level (mg/dL)",
-                    minValue: 0,
-                },
-                vAxis: {
                     title: "Time of Day",
+                    minValue: 0,
                     textStyle: {
                         fontSize: 10,
                         color: "#777"
-                    },
-                    hAxis: {
-                        textStyle: {
-                            color: "#ccc"
-                        }
                     }
-                }
-            }
+                },
+                vAxis: {
+                    // title: "Weight (lbs) + BMI"
+                    minValue: 0,
+                    maxValue: 350
+                },
+                pointSize: 5,
+                // axes: {
+                //     x: {
+                //         0: { side: 'top' }
+                //     }
+                // }
+            },
         }
+
     }
 
 
@@ -73,45 +77,47 @@ class BloodGlucose extends Component {
         let dataOut = [];
 
         //set col headers
-        dataOut.push(["Date", "Glucose Level"]);
+        dataOut.push(["Time of Day", "Weight", "Body Water", "BMI"]);
 
         //set column data
         dataIn.forEach((curObj) => {
             let dateStr = curObj.date + " " + curObj.time;
-            let BG = curObj.BG;
+            let Weight = curObj.Weight;
+            let Water = curObj.BodyWater;
+            let BMI = curObj.BMI;
 
-            dataOut.push([dateStr, BG]);
+            dataOut.push([dateStr, Weight, Water, BMI]);
         });
 
         return dataOut;
     }
 
-    componentWillReceiveProps({ data }) {
-        this.setState({ chartData: data });
+    componentWillReceiveProps({ data, type }) {
+        this.setState({ chartData: data, chartType: type });
     }
 
 
     render() {
-        const { chartData, options } = this.state;
+        const { chartData, chartType, options } = this.state;
         let data = this.massageData(chartData);
 
         return (
             <Col>
-                <Hdr>Blood Glucose Chart</Hdr>
+                <Hdr>Weight Chart</Hdr>
                 <Body>
                     <Container>
-                        <Row>
-                            <ChartWrap>
 
+                        <Row id="WeightChart">
+                            <ChartWrap>
                                 <Chart
-                                    chartType="BarChart"
+                                    chartType={chartType}
                                     width="100%"
                                     height="400px"
                                     options={options}
                                     data={data} />
-
                             </ChartWrap>
                         </Row>
+
                     </Container>
                 </Body>
             </Col>
@@ -120,4 +126,4 @@ class BloodGlucose extends Component {
 }
 
 
-export default BloodGlucose
+export default Weight

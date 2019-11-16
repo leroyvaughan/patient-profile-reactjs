@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
 import { Link } from "react-router-dom";
-
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import 'react-super-responsive-table/dist/SuperResponsiveTableStyle.css';
 import styled from 'styled-components'
 
 
@@ -40,8 +39,6 @@ class PatientsList extends Component {
         super(props)
         this.state = {
             patients: [],
-            columns: [],
-            isLoading: false,
         }
     }
 
@@ -52,45 +49,14 @@ class PatientsList extends Component {
         let data = await response.json();
 
         this.setState({
-            patients: data.data,
-            isLoading: false,
+            patients: data.data
         });
     }
 
     render() {
-        const { patients, isLoading } = this.state
+        const { patients } = this.state;
+        let showTable = true;
 
-        const columns = [
-            {
-                Header: 'Patient ID',
-                accessor: 'patientId',
-            },
-            {
-                Header: 'Name',
-                accessor: 'name',
-                className: 'name'
-            },
-            {
-                Header: 'Age',
-                accessor: 'age',
-            },
-            {
-                Header: 'Gender',
-                accessor: 'gender',
-            },
-            {
-                Header: '',
-                accessor: '',
-                Cell: function (props) {
-                    let url = "/patient/" + props.original.patientId;
-                    return (
-                        <Link to={url} className="viewLink">view</Link>
-                    )
-                },
-            },
-        ]
-
-        let showTable = true
         if (!patients.length) {
             showTable = false;
         }
@@ -99,14 +65,38 @@ class PatientsList extends Component {
             <Wrapper>
                 <Background />
                 {showTable && (
-                    <ReactTable
-                        data={patients}
-                        columns={columns}
-                        loading={isLoading}
-                        // defaultPageSize={10}
-                        showPageSizeOptions={false}
-                        minRows={0}
-                    />
+
+                    <Table>
+                        <Thead>
+                            <Tr>
+                                <Th>PatientId</Th>
+                                <Th>Name</Th>
+                                <Th className="age">Age</Th>
+                                <Th>Gender</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {patients.map((curObj, ix) => {
+                                let pID = curObj.patientId;
+                                let name = curObj.name;
+                                let age = curObj.age;
+                                let gender = curObj.gender;
+                                let url = "/patient/" + pID;
+
+
+                                return <Tr key={ix}>
+                                    <Td>
+                                        <Link to={url} className="viewLink">{pID}</Link>
+                                    </Td>
+                                    <Td>{name}</Td>
+                                    <Td className="age">{age}</Td>
+                                    <Td>{gender}</Td>
+                                </Tr>
+                            })
+                            }
+                        </Tbody>
+                    </Table>
+
                 )}
                 <div className="container">
                     <WhiteSpaceImg />
