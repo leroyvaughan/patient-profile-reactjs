@@ -1,6 +1,6 @@
 
 const mainModuleTests = require('./main-module-tests');
-const subModuleTests = require('./sub-module-tests');
+// const subModuleTests = require('./sub-module-tests');
 const controllerTests = require('./controller-tests');
 const integrationTests = require('./integration-tests');
 
@@ -12,7 +12,7 @@ describe("Test Suite -- begin:", function () {
     describe("MAIN MODULE TESTS", mainModuleTests.bind(this));
 
 
-    describe("SUB MODULE TESTS", subModuleTests.bind(this));
+    // describe("SUB MODULE TESTS", subModuleTests.bind(this));
 
     describe("CONTROLLER TESTS", controllerTests.bind(this));
 
@@ -20,3 +20,4 @@ describe("Test Suite -- begin:", function () {
     describe("INTEGRATION TESTS", integrationTests.bind(this));
 
 });
+//npm run test-with-coverage
